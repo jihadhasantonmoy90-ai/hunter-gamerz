@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -8,8 +10,13 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-<!-- Font Awesome Icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<!-- Font Awesome -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 
 <style>
 
@@ -20,495 +27,1057 @@ box-sizing:border-box;
 }
 
 body{
+
 font-family:Poppins,sans-serif;
+
 background:#000;
+
 color:#fff;
+
 overflow:auto;
+
 min-height:100vh;
+
 display:flex;
+
 justify-content:center;
+
 align-items:center;
+
 }
+
+
+/* =========================
+   BACKGROUND PARTICLES
+========================= */
 
 #particles{
+
 position:fixed;
+
 width:100%;
+
 height:100%;
+
 top:0;
+
 left:0;
-z-index:-1;
+
+z-index:-2;
+
 background:
-radial-gradient(circle at center,
+
+radial-gradient(
+circle at center,
 rgba(255,215,0,.15),
-transparent 60%);
-}
-
-
-/* MAIN CARD */
-
-.card{
-width:90%;
-max-width:700px;
-padding:35px;
-text-align:center;
-border-radius:25px;
-background:rgba(255,255,255,.05);
-backdrop-filter:blur(15px);
-border:1px solid rgba(255,215,0,.3);
-
-box-shadow:
-0 0 25px rgba(255,215,0,.3),
-0 0 60px rgba(255,215,0,.15);
-
-animation:glow 3s infinite alternate;
-
-position:relative;
-z-index:10;
-}
-
-@keyframes glow{
-
-from{
-box-shadow:0 0 20px rgba(255,215,0,.25);
-}
-
-to{
-box-shadow:0 0 50px rgba(255,215,0,.5);
-}
+transparent 60%
+);
 
 }
 
 
-/* LOGO */
+/* =========================
+   MOUSE COMET
+========================= */
 
-.logo{
-width:180px;
-border-radius:50%;
-border:4px solid gold;
-box-shadow:0 0 30px gold;
-margin-bottom:20px;
-animation:float 3s ease-in-out infinite;
-}
+#comet{
 
-@keyframes float{
-
-0%,100%{
-transform:translateY(0);
-}
-
-50%{
-transform:translateY(-10px);
-}
-
-}
-
-
-/* TITLE */
-
-h1{
-font-family:Orbitron,sans-serif;
-font-size:3rem;
-color:gold;
-text-shadow:0 0 20px gold;
-}
-
-
-/* TYPING */
-
-.typing{
-font-size:1.1rem;
-margin-top:10px;
-color:#ddd;
-height:30px;
-}
-
-
-/* DESCRIPTION */
-
-.description{
-margin-top:20px;
-line-height:1.8;
-color:#ccc;
-}
-
-
-/* GAME TAGS */
-
-.tags{
-margin-top:25px;
-}
-
-.tags span{
-display:inline-block;
-margin:5px;
-padding:8px 15px;
-
-border:1px solid gold;
-border-radius:30px;
-
-background:rgba(255,215,0,.08);
-
-transition:all .25s ease;
-
-cursor:pointer;
-}
-
-
-/* GAME TAG HOVER */
-
-.tags span:hover{
-
-background:gold;
-color:#000;
-
-transform:
-translateY(-5px)
-scale(1.08);
-
-box-shadow:
-0 0 15px gold,
-0 0 30px rgba(255,215,0,.7);
-
-}
-
-
-/* BUTTON */
-
-.btn{
-display:inline-block;
-margin-top:30px;
-padding:15px 35px;
-border-radius:50px;
-text-decoration:none;
-font-weight:bold;
-background:gold;
-color:#000;
-transition:.3s;
-}
-
-.btn:hover{
-transform:scale(1.08);
-box-shadow:0 0 25px gold;
-}
-
-
-/* FOOTER */
-
-.footer{
-margin-top:20px;
-color:#999;
-font-size:.9rem;
-}
-
-
-/* SOCIAL BUTTONS */
-
-.socials{
-margin-top:30px;
-display:flex;
-justify-content:center;
-gap:12px;
-flex-wrap:wrap;
-}
-
-.social-btn{
-padding:12px 20px;
-border-radius:50px;
-text-decoration:none;
-font-weight:600;
-color:gold;
-border:1px solid gold;
-background:rgba(255,215,0,.08);
-
-transition:all .25s ease;
-
-cursor:pointer;
-
-display:flex;
-align-items:center;
-justify-content:center;
-gap:8px;
-}
-
-.social-btn i{
-font-size:18px;
-transition:all .25s ease;
-}
-
-.social-btn:hover{
-background:gold;
-color:#000;
-
-transform:
-translateY(-6px)
-scale(1.05);
-
-box-shadow:
-0 0 15px gold,
-0 0 30px rgba(255,215,0,.7);
-}
-
-.social-btn:hover i{
-transform:
-scale(1.2)
-rotate(-5deg);
-}
-
-.social-btn:active{
-transform:
-translateY(-2px)
-scale(.98);
-}
-
-
-/* MOUSE COMET */
-
-#mouseComet{
 position:fixed;
-top:0;
-left:0;
 
-width:100vw;
-height:100vh;
+width:7px;
+
+height:7px;
+
+border-radius:50%;
+
+background:#ffd700;
+
+box-shadow:
+
+0 0 5px #ffd700,
+0 0 10px #ffd700,
+0 0 18px rgba(255,215,0,.8);
 
 pointer-events:none;
 
 z-index:9999;
+
+opacity:0;
+
+transform:translate(-50%,-50%);
+
+transition:
+
+left .08s linear,
+top .08s linear,
+opacity .2s ease;
+
 }
 
 
-/* QR CODE SECTION */
+/* comet tail */
+
+#comet::before{
+
+content:"";
+
+position:absolute;
+
+width:45px;
+
+height:2px;
+
+right:2px;
+
+top:50%;
+
+transform:
+
+translateY(-50%)
+rotate(-25deg);
+
+transform-origin:right center;
+
+background:
+
+linear-gradient(
+to left,
+rgba(255,215,0,.8),
+transparent
+);
+
+filter:blur(.5px);
+
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.card{
+
+width:90%;
+
+max-width:700px;
+
+padding:35px;
+
+text-align:center;
+
+border-radius:25px;
+
+background:rgba(255,255,255,.05);
+
+backdrop-filter:blur(15px);
+
+border:1px solid rgba(255,215,0,.3);
+
+box-shadow:
+
+0 0 25px rgba(255,215,0,.3),
+
+0 0 60px rgba(255,215,0,.15);
+
+animation:glow 3s infinite alternate;
+
+}
+
+
+/* CARD GLOW */
+
+@keyframes glow{
+
+from{
+
+box-shadow:
+
+0 0 20px rgba(255,215,0,.25);
+
+}
+
+to{
+
+box-shadow:
+
+0 0 50px rgba(255,215,0,.5);
+
+}
+
+}
+
+
+/* =========================
+   LOGO
+========================= */
+
+.logo{
+
+width:180px;
+
+border-radius:50%;
+
+border:4px solid gold;
+
+box-shadow:0 0 30px gold;
+
+margin-bottom:20px;
+
+animation:float 3s ease-in-out infinite;
+
+cursor:pointer;
+
+}
+
+
+@keyframes float{
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-10px);
+
+}
+
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+h1{
+
+font-family:Orbitron,sans-serif;
+
+font-size:3rem;
+
+color:gold;
+
+text-shadow:0 0 20px gold;
+
+}
+
+
+/* =========================
+   TYPING
+========================= */
+
+.typing{
+
+font-size:1.1rem;
+
+margin-top:10px;
+
+color:#ddd;
+
+height:30px;
+
+}
+
+
+/* =========================
+   DESCRIPTION
+========================= */
+
+.description{
+
+margin-top:20px;
+
+line-height:1.8;
+
+color:#ccc;
+
+}
+
+
+/* =========================
+   GAME TAGS
+========================= */
+
+.tags{
+
+margin-top:25px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+flex-wrap:wrap;
+
+gap:10px;
+
+}
+
+
+/* GAME BUTTON */
+
+.tags span{
+
+display:inline-block;
+
+margin:0;
+
+padding:8px 15px;
+
+border:1px solid gold;
+
+border-radius:30px;
+
+background:rgba(255,215,0,.08);
+
+color:#fff;
+
+cursor:pointer;
+
+transition:
+
+transform .25s ease,
+background .25s ease,
+box-shadow .25s ease;
+
+}
+
+
+/* GAME HOVER */
+
+.tags span:hover{
+
+background:gold;
+
+color:#000;
+
+transform:
+
+translateY(-5px)
+scale(1.08);
+
+box-shadow:
+
+0 0 15px gold,
+0 0 30px rgba(255,215,0,.6);
+
+}
+
+
+/* =========================
+   SOCIAL BUTTONS
+========================= */
+
+.socials{
+
+margin-top:30px;
+
+display:flex;
+
+justify-content:center;
+
+gap:12px;
+
+flex-wrap:wrap;
+
+}
+
+
+.social-btn{
+
+padding:12px 20px;
+
+border-radius:50px;
+
+text-decoration:none;
+
+font-weight:600;
+
+color:gold;
+
+border:1px solid gold;
+
+background:rgba(255,215,0,.08);
+
+transition:
+
+all .25s ease;
+
+cursor:pointer;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+gap:8px;
+
+}
+
+
+.social-btn i{
+
+font-size:18px;
+
+transition:
+
+transform .25s ease;
+
+}
+
+
+.social-btn:hover{
+
+background:gold;
+
+color:#000;
+
+transform:
+
+translateY(-6px)
+scale(1.05);
+
+box-shadow:
+
+0 0 15px gold,
+
+0 0 30px rgba(255,215,0,.7);
+
+}
+
+
+.social-btn:hover i{
+
+transform:
+
+scale(1.2)
+rotate(-5deg);
+
+}
+
+
+.social-btn:active{
+
+transform:
+
+translateY(-2px)
+scale(.98);
+
+}
+
+
+/* =========================
+   STATS
+========================= */
+
+.stats{
+
+margin-top:25px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+gap:12px;
+
+flex-wrap:wrap;
+
+}
+
+
+.stat{
+
+padding:10px 18px;
+
+border-radius:50px;
+
+border:1px solid rgba(255,215,0,.7);
+
+background:rgba(255,215,0,.06);
+
+color:#ffd700;
+
+font-weight:600;
+
+transition:.25s;
+
+}
+
+
+.stat:hover{
+
+transform:
+
+translateY(-4px)
+scale(1.05);
+
+box-shadow:
+
+0 0 15px gold;
+
+}
+
+
+/* =========================
+   LIKE BUTTON
+========================= */
+
+.like-btn{
+
+border:1px solid gold;
+
+background:rgba(255,215,0,.08);
+
+color:gold;
+
+padding:12px 22px;
+
+border-radius:50px;
+
+font-family:Poppins,sans-serif;
+
+font-size:15px;
+
+font-weight:600;
+
+cursor:pointer;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+gap:8px;
+
+transition:
+
+all .25s ease;
+
+}
+
+
+.like-btn i{
+
+font-size:18px;
+
+transition:.25s;
+
+}
+
+
+.like-btn:hover{
+
+background:gold;
+
+color:#000;
+
+transform:
+
+translateY(-5px)
+scale(1.06);
+
+box-shadow:
+
+0 0 15px gold,
+0 0 30px rgba(255,215,0,.6);
+
+}
+
+
+.like-btn.liked{
+
+background:gold;
+
+color:#000;
+
+box-shadow:
+
+0 0 15px gold,
+0 0 30px rgba(255,215,0,.7);
+
+}
+
+
+.like-btn.liked i{
+
+transform:scale(1.15);
+
+}
+
+
+/* =========================
+   QR SECTION
+========================= */
 
 .qr-section{
+
 margin-top:30px;
-padding:20px;
-border:1px solid rgba(255,215,0,.35);
-border-radius:20px;
-background:rgba(255,215,0,.05);
-transition:all .3s ease;
+
 }
 
-.qr-title{
-font-family:Orbitron,sans-serif;
-font-size:1.1rem;
-color:gold;
-margin-bottom:15px;
-text-shadow:0 0 10px gold;
-}
 
 .qr-image{
-width:220px;
+
+width:180px;
+
 max-width:80%;
-display:block;
-margin:0 auto;
-border-radius:15px;
-border:3px solid gold;
+
+border-radius:18px;
+
+border:2px solid gold;
+
 box-shadow:
-0 0 15px gold,
-0 0 30px rgba(255,215,0,.4);
-transition:all .3s ease;
+
+0 0 20px rgba(255,215,0,.5);
+
+cursor:pointer;
+
+transition:
+
+transform .3s ease,
+box-shadow .3s ease;
+
 }
+
 
 .qr-image:hover{
-transform:scale(1.05);
+
+transform:
+
+scale(1.05);
+
 box-shadow:
-0 0 20px gold,
-0 0 40px rgba(255,215,0,.7);
+
+0 0 30px gold;
+
 }
+
 
 .qr-text{
-margin-top:12px;
-color:#ccc;
-font-size:.9rem;
+
+margin-top:10px;
+
+color:#aaa;
+
+font-size:.85rem;
+
 }
 
-/* QR IMAGE LIGHTBOX */
 
-.qr-image{
-cursor:pointer;
-}
+/* =========================
+   QR MODAL
+========================= */
 
-.qr-lightbox{
+.qr-modal{
+
 position:fixed;
+
 inset:0;
+
+background:rgba(0,0,0,.88);
+
+backdrop-filter:blur(8px);
+
 display:none;
-align-items:center;
+
 justify-content:center;
-padding:25px;
-background:rgba(0,0,0,.45);
-backdrop-filter:blur(4px);
--webkit-backdrop-filter:blur(4px);
+
+align-items:center;
+
 z-index:10000;
-cursor:zoom-out;
+
+padding:20px;
+
 }
 
-.qr-lightbox.show{
+
+.qr-modal.active{
+
 display:flex;
+
 }
 
-.qr-lightbox img{
-width:min(650px,90vw);
+
+.qr-modal img{
+
+max-width:90vw;
+
 max-height:90vh;
+
+width:auto;
+
+height:auto;
+
 object-fit:contain;
+
 border-radius:20px;
+
 border:3px solid gold;
+
 box-shadow:
-0 0 25px gold,
-0 0 60px rgba(255,215,0,.7);
+
+0 0 30px gold,
+0 0 70px rgba(255,215,0,.6);
+
 animation:qrZoom .25s ease;
-cursor:default;
+
+cursor:pointer;
+
 }
+
 
 @keyframes qrZoom{
+
 from{
-transform:scale(.65);
+
+transform:scale(.7);
+
 opacity:0;
+
 }
+
 to{
+
 transform:scale(1);
+
 opacity:1;
+
 }
+
 }
+
+
+/* close button */
 
 .qr-close{
+
 position:absolute;
-top:20px;
-right:25px;
-width:45px;
-height:45px;
-border-radius:50%;
-border:1px solid gold;
-background:rgba(0,0,0,.55);
+
+top:25px;
+
+right:30px;
+
+font-size:35px;
+
 color:gold;
-font-size:25px;
+
 cursor:pointer;
-display:flex;
-align-items:center;
-justify-content:center;
-transition:.25s;
+
+text-shadow:0 0 15px gold;
+
 }
 
-.qr-close:hover{
-background:gold;
-color:#000;
-transform:scale(1.1);
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+
+margin-top:20px;
+
+color:#999;
+
+font-size:.9rem;
+
 }
 
-/* MOBILE */
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:768px){
 
+.card{
+
+padding:25px 18px;
+
+}
+
 .logo{
+
 width:140px;
+
 }
 
 h1{
+
 font-size:2rem;
+
+}
+
+.description{
+
+font-size:.9rem;
+
+}
+
+.tags span{
+
+font-size:.85rem;
+
+padding:7px 12px;
+
+}
+
+.social-btn{
+
+padding:10px 15px;
+
+font-size:.9rem;
+
+}
+
+.stat{
+
+font-size:.85rem;
+
+}
+
+.qr-image{
+
+width:150px;
+
+}
+
+#comet{
+
+display:none;
+
+}
+
+}
+
+
+/* =========================
+   SMALL SCREEN
+========================= */
+
+@media(max-width:450px){
+
+h1{
+
+font-size:1.7rem;
+
+}
+
+.socials{
+
+gap:8px;
+
+}
+
+.social-btn{
+
+padding:9px 12px;
+
+}
+
+.stats{
+
+gap:8px;
+
 }
 
 }
 
 </style>
+
 </head>
+
 
 <body>
 
+
+<!-- BACKGROUND -->
+
 <canvas id="particles"></canvas>
 
+
 <!-- MOUSE COMET -->
-<canvas id="mouseComet"></canvas>
+
+<div id="comet"></div>
 
 
-<div class="card">
+<!-- MAIN CARD -->
 
-<img src="logo.png" class="logo">
+<div class="card" id="mainCard">
+
+
+<img
+src="logo.png"
+class="logo"
+alt="Hunter GamerZ Logo"
+>
+
 
 <h1>Hunter GamerZ</h1>
 
-<div class="typing" id="typing"></div>
+
+<div
+class="typing"
+id="typing">
+</div>
 
 
 <div class="description">
 
 🎮 Hunter GamerZ is a welcoming gaming community for gamers and friends.
+
 Join voice chats, events, giveaways and enjoy amazing adventures together.
-Become part of the Hunter GamerZ Family today! 🚀🔥
+
+Become part of the HG Family today! 🚀🔥
 
 </div>
 
 
-<!-- GAME TAGS -->
+<!-- =========================
+     GAME NAMES A-Z
+========================= -->
 
 <div class="tags">
 
 <span>Euro Truck Simulator 2</span>
-<span>Free Fire</span>
+
 <span>Grand Theft Auto V</span>
+
 <span>Minecraft</span>
+
 <span>PUBG</span>
+
 <span>Valorant</span>
 
 </div>
 
 
-<!-- SOCIAL BUTTONS -->
+<!-- =========================
+     SOCIAL BUTTONS
+========================= -->
 
 <div class="socials">
 
-<a href="https://discord.gg/mRJdyqGbZY"
+
+<a
+href="https://discord.gg/mRJdyqGbZY"
 target="_blank"
+rel="noopener noreferrer"
 class="social-btn">
 
 <i class="fa-brands fa-discord"></i>
+
 Discord
 
 </a>
 
 
-<a href="https://www.youtube.com/channel/UCSrMuBlhGN1ChvRBWvm2xIg"
+<a
+href="https://www.youtube.com/channel/UCSrMuBlhGN1ChvRBWvm2xIg"
 target="_blank"
+rel="noopener noreferrer"
 class="social-btn">
 
 <i class="fa-brands fa-youtube"></i>
+
 YouTube
 
 </a>
 
 
-<a href="https://www.facebook.com/profile.php?id=61583118716397"
+<a
+href="https://www.facebook.com/profile.php?id=61583118716397"
 target="_blank"
+rel="noopener noreferrer"
 class="social-btn">
 
 <i class="fa-brands fa-facebook"></i>
+
 Facebook
 
 </a>
 
 
-<a href="https://instagram.com/"
+<a
+href="https://instagram.com/"
 target="_blank"
+rel="noopener noreferrer"
 class="social-btn">
 
 <i class="fa-brands fa-instagram"></i>
+
 Instagram
 
 </a>
 
+
 </div>
 
 
-<!-- QR CODE SECTION -->
+<!-- =========================
+     VIEW + LIKE COUNTER
+========================= -->
+
+<div class="stats">
+
+
+<div
+class="stat"
+id="viewCount">
+
+👁 Views: 0
+
+</div>
+
+
+<button
+class="like-btn"
+id="likeButton"
+type="button">
+
+<i class="fa-regular fa-heart"></i>
+
+<span id="likeText">
+
+Like
+
+</span>
+
+<span id="likeCount">
+
+0
+
+</span>
+
+</button>
+
+
+</div>
+
+
+<!-- =========================
+     QR IMAGE
+========================= -->
 
 <div class="qr-section">
 
-<div class="qr-title">
-👑 JOIN HUNTER GAMERZ
-</div>
-
-<img src="qr.png" class="qr-image" alt="Hunter GamerZ Discord QR Code" onclick="openQR()">
+<img
+src="qr.png"
+class="qr-image"
+id="qrImage"
+alt="Hunter GamerZ QR Code"
+>
 
 <div class="qr-text">
-📱 Scan the QR Code to Join Our Discord Server
+
+📱 Click the QR code to enlarge
+
 </div>
 
 </div>
@@ -520,94 +1089,108 @@ Instagram
 
 </div>
 
+
 </div>
 
 
-<!-- QR IMAGE LIGHTBOX -->
+<!-- =========================
+     QR MODAL
+========================= -->
 
-<div class="qr-lightbox" id="qrLightbox" onclick="closeQR(event)">
+<div
+class="qr-modal"
+id="qrModal">
 
-<button class="qr-close" onclick="closeQR(event)" aria-label="Close">
+
+<div
+class="qr-close"
+id="qrClose">
+
 &times;
-</button>
-
-<img src="qr.png" alt="Hunter GamerZ QR Code">
 
 </div>
+
+
+<img
+src="qr.png"
+alt="Large QR Code"
+id="qrLarge"
+>
+
+
+</div>
+
 
 
 <script>
 
+/* =========================================
+   SUPABASE
+========================================= */
 
-/* ==============================
-   QR IMAGE LIGHTBOX
-================================ */
+const SUPABASE_URL =
+"https://wauxzzquzohmfrtasrbv.supabase.co";
 
-function openQR(){
-
-document.getElementById("qrLightbox").classList.add("show");
-
-document.body.style.overflow="hidden";
-
-}
-
-function closeQR(event){
-
-if(event && event.target.tagName==="IMG"){
-return;
-}
-
-document.getElementById("qrLightbox").classList.remove("show");
-
-document.body.style.overflow="";
-
-}
-
-document.addEventListener("keydown",(event)=>{
-
-if(event.key==="Escape"){
-
-document.getElementById("qrLightbox").classList.remove("show");
-
-document.body.style.overflow="";
-
-}
-
-});
+const SUPABASE_KEY =
+"sb_publishable__GyOvUVMVZXs4rgeDOg6sw_-WxdhJ8I";
 
 
-/* ==============================
+const supabaseClient =
+window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+
+/* =========================================
    TYPING EFFECT
-================================ */
+========================================= */
 
 const texts=[
+
 "Active Community 🎉",
+
 "Voice Hangouts 🎙",
+
 "Events & Giveaways 🎁",
+
 "Friendly Environment 🛡",
+
 "Hunter GamerZ 👑"
+
 ];
 
+
 let count=0;
+
 let index=0;
+
 let currentText="";
+
 let letter="";
 
-(function type(){
+
+function type(){
 
 if(count===texts.length){
+
 count=0;
+
 }
 
 currentText=texts[count];
 
 letter=currentText.slice(0,++index);
 
-document.getElementById("typing").textContent=letter;
+document.getElementById(
+"typing"
+).textContent=letter;
+
 
 if(letter.length===currentText.length){
 
 count++;
+
 index=0;
 
 setTimeout(type,1500);
@@ -618,20 +1201,36 @@ setTimeout(type,80);
 
 }
 
-})();
+}
 
 
+type();
 
-/* ==============================
-   BACKGROUND PARTICLES
-================================ */
 
-const canvas=document.getElementById("particles");
+/* =========================================
+   PARTICLES
+========================================= */
 
-const ctx=canvas.getContext("2d");
+const canvas =
+document.getElementById("particles");
 
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
+const ctx =
+canvas.getContext("2d");
+
+
+function resizeCanvas(){
+
+canvas.width =
+window.innerWidth;
+
+canvas.height =
+window.innerHeight;
+
+}
+
+
+resizeCanvas();
+
 
 let particles=[];
 
@@ -644,9 +1243,9 @@ x:Math.random()*canvas.width,
 
 y:Math.random()*canvas.height,
 
-r:Math.random()*2+1,
+r:Math.random()*1.2+0.4,
 
-d:Math.random()*2
+d:Math.random()*1.2+0.3
 
 });
 
@@ -662,6 +1261,7 @@ canvas.width,
 canvas.height
 );
 
+
 ctx.fillStyle="gold";
 
 
@@ -669,16 +1269,21 @@ for(let i=0;i<particles.length;i++){
 
 let p=particles[i];
 
+
 ctx.beginPath();
 
+
 ctx.arc(
+
 p.x,
 p.y,
 p.r,
 0,
 Math.PI*2,
 true
+
 );
+
 
 ctx.fill();
 
@@ -701,284 +1306,464 @@ requestAnimationFrame(draw);
 
 }
 
+
 draw();
 
 
-
-/* ==============================
-   RESPONSIVE PARTICLE CANVAS
-================================ */
-
-window.addEventListener("resize",()=>{
-
-canvas.width=window.innerWidth;
-
-canvas.height=window.innerHeight;
-
-});
+window.addEventListener(
+"resize",
+resizeCanvas
+);
 
 
+/* =========================================
+   MOUSE COMET
+========================================= */
 
-/* ==============================
-   MOUSE COMET EFFECT
-================================ */
+const comet =
+document.getElementById("comet");
 
-const cometCanvas=document.getElementById("mouseComet");
-
-const cometCtx=cometCanvas.getContext("2d");
-
-
-function resizeComet(){
-
-cometCanvas.width=window.innerWidth;
-
-cometCanvas.height=window.innerHeight;
-
-}
-
-resizeComet();
-
-window.addEventListener("resize",resizeComet);
+const mainCard =
+document.getElementById("mainCard");
 
 
-/* Mouse position */
+let mouseX=0;
 
-let mouseX=-100;
-let mouseY=-100;
-
-
-/* Smooth comet position */
-
-let cometX=-100;
-let cometY=-100;
+let mouseY=0;
 
 
-/* Comet visibility */
-
-let cometVisible=false;
-
-
-/* Comet trail */
-
-let cometTrail=[];
-
-const maxTrail=40;
-
-
-
-/* Mouse movement */
-
-document.addEventListener("mousemove",(e)=>{
+document.addEventListener(
+"mousemove",
+function(e){
 
 mouseX=e.clientX;
+
 mouseY=e.clientY;
 
 
-/* Detect card */
-
-const card=document.querySelector(".card");
-
-if(card){
-
-const rect=card.getBoundingClientRect();
-
-const insideCard=
-mouseX>=rect.left &&
-mouseX<=rect.right &&
-mouseY>=rect.top &&
-mouseY<=rect.bottom;
+const rect =
+mainCard.getBoundingClientRect();
 
 
-/* Outside card = ON */
-/* Inside card = OFF */
+const insideCard =
 
-cometVisible=!insideCard;
-
-}
-
-});
+mouseX >= rect.left &&
+mouseX <= rect.right &&
+mouseY >= rect.top &&
+mouseY <= rect.bottom;
 
 
+if(insideCard){
 
-/* ==============================
-   DRAW COMET
-================================ */
+comet.style.opacity="0";
 
-function drawComet(){
+}else{
 
-cometCtx.clearRect(
-0,
-0,
-cometCanvas.width,
-cometCanvas.height
-);
+comet.style.opacity="1";
 
+comet.style.left =
+mouseX+"px";
 
-if(cometVisible){
-
-
-/* Smooth mouse following */
-
-cometX +=
-(mouseX-cometX)*0.20;
-
-cometY +=
-(mouseY-cometY)*0.20;
-
-
-/* Add trail point */
-
-cometTrail.push({
-x:cometX,
-y:cometY
-});
-
-
-if(cometTrail.length>maxTrail){
-
-cometTrail.shift();
+comet.style.top =
+mouseY+"px";
 
 }
 
-
-
-/* COMET TAIL */
-
-for(let i=0;i<cometTrail.length;i++){
-
-const p=cometTrail[i];
-
-const progress=i/cometTrail.length;
-
-const radius=progress*3.5;
-
-const opacity=progress*0.40;
-
-
-cometCtx.beginPath();
-
-cometCtx.arc(
-p.x,
-p.y,
-radius,
-0,
-Math.PI*2
+}
 );
 
-cometCtx.fillStyle=
-`rgba(255,215,0,${opacity})`;
 
-cometCtx.shadowBlur=10;
+/* =========================================
+   SUPABASE STATS
+========================================= */
 
-cometCtx.shadowColor="gold";
+let currentStats=null;
 
-cometCtx.fill();
+
+/* LOAD STATS */
+
+async function loadStats(){
+
+const {data,error}=
+
+await supabaseClient
+
+.from("website_stats")
+
+.select("*")
+
+.eq("id",1)
+
+.single();
+
+
+if(error){
+
+console.error(
+"Stats loading error:",
+error
+);
+
+return;
 
 }
 
 
+currentStats=data;
 
-/* SMALL YELLOW POINT */
 
-const glow=
-cometCtx.createRadialGradient(
+/* VIEW COUNT */
 
-cometX,
-cometY,
-0,
-
-cometX,
-cometY,
-9
-
-);
-
-glow.addColorStop(
-0,
-"rgba(255,255,255,1)"
-);
-
-glow.addColorStop(
-0.20,
-"rgba(255,245,150,.95)"
-);
-
-glow.addColorStop(
-0.45,
-"rgba(255,215,0,.70)"
-);
-
-glow.addColorStop(
-0.70,
-"rgba(255,180,0,.18)"
-);
-
-glow.addColorStop(
-1,
-"rgba(255,215,0,0)"
+const alreadyViewed =
+localStorage.getItem(
+"hunter_gamerz_viewed"
 );
 
 
-cometCtx.beginPath();
+/*
+   একজন browser প্রথমবার website
+   visit করলে view বাড়বে।
+*/
 
-cometCtx.arc(
-cometX,
-cometY,
-8,
-0,
-Math.PI*2
+if(!alreadyViewed){
+
+const newViews =
+data.views + 1;
+
+
+const {error:updateError}=
+
+await supabaseClient
+
+.from("website_stats")
+
+.update({
+
+views:newViews
+
+})
+
+.eq("id",1);
+
+
+if(!updateError){
+
+localStorage.setItem(
+"hunter_gamerz_viewed",
+"yes"
 );
 
-cometCtx.fillStyle=glow;
+currentStats.views =
+newViews;
 
-cometCtx.shadowBlur=10;
-
-cometCtx.shadowColor="gold";
-
-cometCtx.fill();
-
-
-
-/* TINY WHITE CORE */
-
-cometCtx.beginPath();
-
-cometCtx.arc(
-cometX,
-cometY,
-2,
-0,
-Math.PI*2
-);
-
-cometCtx.fillStyle="#fff";
-
-cometCtx.shadowBlur=8;
-
-cometCtx.shadowColor="#fff";
-
-cometCtx.fill();
+}
 
 }
 
 
-/* CLEAR COMET INSIDE CARD */
+/* SHOW VIEW */
 
-else{
+document.getElementById(
+"viewCount"
+).textContent=
 
-cometTrail.length=0;
+"👁 Views: "
++
+currentStats.views;
+
+
+/* SHOW LIKE */
+
+document.getElementById(
+"likeCount"
+).textContent=
+
+currentStats.likes;
+
+
+/* CHECK LIKE */
+
+if(
+localStorage.getItem(
+"hunter_gamerz_liked"
+)==="yes"
+){
+
+setLiked();
+
+}
 
 }
 
 
-requestAnimationFrame(drawComet);
+/* =========================================
+   LIKE BUTTON
+========================================= */
+
+const likeButton =
+document.getElementById(
+"likeButton"
+);
+
+
+const likeText =
+document.getElementById(
+"likeText"
+);
+
+
+const likeIcon =
+likeButton.querySelector("i");
+
+
+function setLiked(){
+
+likeButton.classList.add(
+"liked"
+);
+
+likeIcon.className =
+"fa-solid fa-heart";
+
+likeText.textContent =
+"Liked";
 
 }
 
 
-drawComet();
+function setUnliked(){
+
+likeButton.classList.remove(
+"liked"
+);
+
+likeIcon.className =
+"fa-regular fa-heart";
+
+likeText.textContent =
+"Like";
+
+}
+
+
+likeButton.addEventListener(
+"click",
+async function(){
+
+if(!currentStats){
+
+return;
+
+}
+
+
+const alreadyLiked =
+localStorage.getItem(
+"hunter_gamerz_liked"
+);
+
+
+/* UNLIKE */
+
+if(alreadyLiked==="yes"){
+
+const newLikes =
+Math.max(
+0,
+currentStats.likes-1
+);
+
+
+const {error}=
+
+await supabaseClient
+
+.from("website_stats")
+
+.update({
+
+likes:newLikes
+
+})
+
+.eq("id",1);
+
+
+if(error){
+
+console.error(error);
+
+return;
+
+}
+
+
+currentStats.likes =
+newLikes;
+
+
+localStorage.removeItem(
+"hunter_gamerz_liked"
+);
+
+
+setUnliked();
+
+
+document.getElementById(
+"likeCount"
+).textContent =
+newLikes;
+
+
+return;
+
+}
+
+
+/* LIKE */
+
+const newLikes =
+currentStats.likes+1;
+
+
+const {error}=
+
+await supabaseClient
+
+.from("website_stats")
+
+.update({
+
+likes:newLikes
+
+})
+
+.eq("id",1);
+
+
+if(error){
+
+console.error(error);
+
+return;
+
+}
+
+
+currentStats.likes =
+newLikes;
+
+
+localStorage.setItem(
+"hunter_gamerz_liked",
+"yes"
+);
+
+
+setLiked();
+
+
+document.getElementById(
+"likeCount"
+).textContent =
+newLikes;
+
+}
+);
+
+
+/* =========================================
+   QR MODAL
+========================================= */
+
+const qrImage =
+document.getElementById(
+"qrImage"
+);
+
+
+const qrModal =
+document.getElementById(
+"qrModal"
+);
+
+
+const qrClose =
+document.getElementById(
+"qrClose"
+);
+
+
+qrImage.addEventListener(
+"click",
+function(){
+
+qrModal.classList.add(
+"active"
+);
+
+}
+);
+
+
+qrClose.addEventListener(
+"click",
+function(){
+
+qrModal.classList.remove(
+"active"
+);
+
+}
+);
+
+
+/* Click outside QR */
+
+qrModal.addEventListener(
+"click",
+function(e){
+
+if(e.target===qrModal){
+
+qrModal.classList.remove(
+"active"
+);
+
+}
+
+}
+);
+
+
+/* ESC CLOSE */
+
+document.addEventListener(
+"keydown",
+function(e){
+
+if(e.key==="Escape"){
+
+qrModal.classList.remove(
+"active"
+);
+
+}
+
+}
+);
+
+
+/* =========================================
+   START STATS
+========================================= */
+
+loadStats();
 
 </script>
 
+
 </body>
+
 </html>
