@@ -647,12 +647,12 @@ const progress=i/cometTrail.length;
 
 /* Smaller tail */
 
-const radius=progress*4;
+const radius=progress*3.5;
 
 
 /* Fainter tail */
 
-const opacity=progress*0.45;
+const opacity=progress*0.40;
 
 
 cometCtx.beginPath();
@@ -668,7 +668,7 @@ Math.PI*2
 cometCtx.fillStyle=
 `rgba(255,215,0,${opacity})`;
 
-cometCtx.shadowBlur=12;
+cometCtx.shadowBlur=10;
 
 cometCtx.shadowColor="gold";
 
@@ -679,7 +679,7 @@ cometCtx.fill();
 
 
 /* ==============================
-   SMALL MAIN COMET GLOW
+   VERY SMALL YELLOW POINT
 ================================ */
 
 const glow=
@@ -691,7 +691,7 @@ cometY,
 
 cometX,
 cometY,
-16
+9
 
 );
 
@@ -701,18 +701,18 @@ glow.addColorStop(
 );
 
 glow.addColorStop(
-0.15,
-"rgba(255,245,150,1)"
+0.20,
+"rgba(255,245,150,.95)"
 );
 
 glow.addColorStop(
-0.40,
-"rgba(255,215,0,.85)"
+0.45,
+"rgba(255,215,0,.70)"
 );
 
 glow.addColorStop(
 0.70,
-"rgba(255,180,0,.25)"
+"rgba(255,180,0,.18)"
 );
 
 glow.addColorStop(
@@ -726,14 +726,14 @@ cometCtx.beginPath();
 cometCtx.arc(
 cometX,
 cometY,
-15,
+8,
 0,
 Math.PI*2
 );
 
 cometCtx.fillStyle=glow;
 
-cometCtx.shadowBlur=20;
+cometCtx.shadowBlur=10;
 
 cometCtx.shadowColor="gold";
 
@@ -742,7 +742,7 @@ cometCtx.fill();
 
 
 /* ==============================
-   SMALL WHITE CORE
+   TINY WHITE CORE
 ================================ */
 
 cometCtx.beginPath();
@@ -750,14 +750,14 @@ cometCtx.beginPath();
 cometCtx.arc(
 cometX,
 cometY,
-2.5,
+2,
 0,
 Math.PI*2
 );
 
 cometCtx.fillStyle="#fff";
 
-cometCtx.shadowBlur=12;
+cometCtx.shadowBlur=8;
 
 cometCtx.shadowColor="#fff";
 
