@@ -277,6 +277,123 @@ z-index:9999;
 }
 
 
+/* QR CODE SECTION */
+
+.qr-section{
+margin-top:30px;
+padding:20px;
+border:1px solid rgba(255,215,0,.35);
+border-radius:20px;
+background:rgba(255,215,0,.05);
+transition:all .3s ease;
+}
+
+.qr-title{
+font-family:Orbitron,sans-serif;
+font-size:1.1rem;
+color:gold;
+margin-bottom:15px;
+text-shadow:0 0 10px gold;
+}
+
+.qr-image{
+width:220px;
+max-width:80%;
+display:block;
+margin:0 auto;
+border-radius:15px;
+border:3px solid gold;
+box-shadow:
+0 0 15px gold,
+0 0 30px rgba(255,215,0,.4);
+transition:all .3s ease;
+}
+
+.qr-image:hover{
+transform:scale(1.05);
+box-shadow:
+0 0 20px gold,
+0 0 40px rgba(255,215,0,.7);
+}
+
+.qr-text{
+margin-top:12px;
+color:#ccc;
+font-size:.9rem;
+}
+
+/* QR IMAGE LIGHTBOX */
+
+.qr-image{
+cursor:pointer;
+}
+
+.qr-lightbox{
+position:fixed;
+inset:0;
+display:none;
+align-items:center;
+justify-content:center;
+padding:25px;
+background:rgba(0,0,0,.45);
+backdrop-filter:blur(4px);
+-webkit-backdrop-filter:blur(4px);
+z-index:10000;
+cursor:zoom-out;
+}
+
+.qr-lightbox.show{
+display:flex;
+}
+
+.qr-lightbox img{
+width:min(650px,90vw);
+max-height:90vh;
+object-fit:contain;
+border-radius:20px;
+border:3px solid gold;
+box-shadow:
+0 0 25px gold,
+0 0 60px rgba(255,215,0,.7);
+animation:qrZoom .25s ease;
+cursor:default;
+}
+
+@keyframes qrZoom{
+from{
+transform:scale(.65);
+opacity:0;
+}
+to{
+transform:scale(1);
+opacity:1;
+}
+}
+
+.qr-close{
+position:absolute;
+top:20px;
+right:25px;
+width:45px;
+height:45px;
+border-radius:50%;
+border:1px solid gold;
+background:rgba(0,0,0,.55);
+color:gold;
+font-size:25px;
+cursor:pointer;
+display:flex;
+align-items:center;
+justify-content:center;
+transition:.25s;
+}
+
+.qr-close:hover{
+background:gold;
+color:#000;
+transform:scale(1.1);
+}
+
 /* MOBILE */
 
 @media(max-width:768px){
@@ -380,6 +497,23 @@ Instagram
 </div>
 
 
+<!-- QR CODE SECTION -->
+
+<div class="qr-section">
+
+<div class="qr-title">
+👑 JOIN HUNTER GAMERZ
+</div>
+
+<img src="qr.png" class="qr-image" alt="Hunter GamerZ Discord QR Code" onclick="openQR()">
+
+<div class="qr-text">
+📱 Scan the QR Code to Join Our Discord Server
+</div>
+
+</div>
+
+
 <div class="footer">
 
 👑 Play Together • Grow Together • Hunt Together
@@ -389,7 +523,57 @@ Instagram
 </div>
 
 
+<!-- QR IMAGE LIGHTBOX -->
+
+<div class="qr-lightbox" id="qrLightbox" onclick="closeQR(event)">
+
+<button class="qr-close" onclick="closeQR(event)" aria-label="Close">
+&times;
+</button>
+
+<img src="qr.png" alt="Hunter GamerZ QR Code">
+
+</div>
+
+
 <script>
+
+
+/* ==============================
+   QR IMAGE LIGHTBOX
+================================ */
+
+function openQR(){
+
+document.getElementById("qrLightbox").classList.add("show");
+
+document.body.style.overflow="hidden";
+
+}
+
+function closeQR(event){
+
+if(event && event.target.tagName==="IMG"){
+return;
+}
+
+document.getElementById("qrLightbox").classList.remove("show");
+
+document.body.style.overflow="";
+
+}
+
+document.addEventListener("keydown",(event)=>{
+
+if(event.key==="Escape"){
+
+document.getElementById("qrLightbox").classList.remove("show");
+
+document.body.style.overflow="";
+
+}
+
+});
 
 
 /* ==============================
