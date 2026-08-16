@@ -43,6 +43,9 @@ rgba(255,215,0,.15),
 transparent 60%);
 }
 
+
+/* MAIN CARD */
+
 .card{
 width:90%;
 max-width:700px;
@@ -58,6 +61,9 @@ box-shadow:
 0 0 60px rgba(255,215,0,.15);
 
 animation:glow 3s infinite alternate;
+
+position:relative;
+z-index:10;
 }
 
 @keyframes glow{
@@ -71,6 +77,9 @@ box-shadow:0 0 50px rgba(255,215,0,.5);
 }
 
 }
+
+
+/* LOGO */
 
 .logo{
 width:180px;
@@ -93,12 +102,18 @@ transform:translateY(-10px);
 
 }
 
+
+/* TITLE */
+
 h1{
 font-family:Orbitron,sans-serif;
 font-size:3rem;
 color:gold;
 text-shadow:0 0 20px gold;
 }
+
+
+/* TYPING */
 
 .typing{
 font-size:1.1rem;
@@ -107,11 +122,17 @@ color:#ddd;
 height:30px;
 }
 
+
+/* DESCRIPTION */
+
 .description{
 margin-top:20px;
 line-height:1.8;
 color:#ccc;
 }
+
+
+/* TAGS */
 
 .tags{
 margin-top:25px;
@@ -125,6 +146,9 @@ border:1px solid gold;
 border-radius:30px;
 background:rgba(255,215,0,.08);
 }
+
+
+/* BUTTON */
 
 .btn{
 display:inline-block;
@@ -142,6 +166,9 @@ transition:.3s;
 transform:scale(1.08);
 box-shadow:0 0 25px gold;
 }
+
+
+/* FOOTER */
 
 .footer{
 margin-top:20px;
@@ -168,9 +195,11 @@ font-weight:600;
 color:gold;
 border:1px solid gold;
 background:rgba(255,215,0,.08);
+
 transition:all .25s ease;
+
 cursor:pointer;
-  
+
 display:flex;
 align-items:center;
 justify-content:center;
@@ -179,23 +208,50 @@ gap:8px;
 
 .social-btn i{
 font-size:18px;
+transition:all .25s ease;
 }
 
 .social-btn:hover{
 background:gold;
 color:#000;
-transform:translateY(-6px) scale(1.05);
+
+transform:
+translateY(-6px)
+scale(1.05);
+
 box-shadow:
 0 0 15px gold,
 0 0 30px rgba(255,215,0,.7);
 }
 
 .social-btn:hover i{
-transform:scale(1.2) rotate(-5deg);
+transform:
+scale(1.2)
+rotate(-5deg);
 }
 
 .social-btn:active{
-transform:translateY(-2px) scale(.98);
+transform:
+translateY(-2px)
+scale(.98);
+}
+
+
+/* ==============================
+   MOUSE COMET
+================================ */
+
+#mouseComet{
+position:fixed;
+top:0;
+left:0;
+
+width:100vw;
+height:100vh;
+
+pointer-events:none;
+
+z-index:9999;
 }
 
 
@@ -220,6 +276,10 @@ font-size:2rem;
 
 <canvas id="particles"></canvas>
 
+<!-- MOUSE COMET CANVAS -->
+<canvas id="mouseComet"></canvas>
+
+
 <div class="card">
 
 <img src="logo.png" class="logo">
@@ -227,6 +287,7 @@ font-size:2rem;
 <h1>Hunter GamerZ</h1>
 
 <div class="typing" id="typing"></div>
+
 
 <div class="description">
 
@@ -306,7 +367,10 @@ Instagram
 
 <script>
 
-/* TYPING EFFECT */
+
+/* ==============================
+   TYPING EFFECT
+================================ */
 
 const texts=[
 "Active Community 🎉",
@@ -349,9 +413,13 @@ setTimeout(type,80);
 })();
 
 
-/* PARTICLES */
+
+/* ==============================
+   BACKGROUND PARTICLES
+================================ */
 
 const canvas=document.getElementById("particles");
+
 const ctx=canvas.getContext("2d");
 
 canvas.width=window.innerWidth;
@@ -359,13 +427,17 @@ canvas.height=window.innerHeight;
 
 let particles=[];
 
+
 for(let i=0;i<100;i++){
 
 particles.push({
 
 x:Math.random()*canvas.width,
+
 y:Math.random()*canvas.height,
+
 r:Math.random()*2+1,
+
 d:Math.random()*2
 
 });
@@ -384,6 +456,7 @@ canvas.height
 
 ctx.fillStyle="gold";
 
+
 for(let i=0;i<particles.length;i++){
 
 let p=particles[i];
@@ -401,7 +474,9 @@ true
 
 ctx.fill();
 
+
 p.y+=p.d;
+
 
 if(p.y>canvas.height){
 
@@ -413,6 +488,7 @@ p.x=Math.random()*canvas.width;
 
 }
 
+
 requestAnimationFrame(draw);
 
 }
@@ -420,14 +496,327 @@ requestAnimationFrame(draw);
 draw();
 
 
-/* RESPONSIVE CANVAS */
+
+/* ==============================
+   RESPONSIVE PARTICLE CANVAS
+================================ */
 
 window.addEventListener("resize",()=>{
 
 canvas.width=window.innerWidth;
+
 canvas.height=window.innerHeight;
 
 });
+
+
+
+/* ==============================
+   MOUSE COMET EFFECT
+================================ */
+
+const cometCanvas=document.getElementById("mouseComet");
+
+const cometCtx=cometCanvas.getContext("2d");
+
+
+function resizeComet(){
+
+cometCanvas.width=window.innerWidth;
+
+cometCanvas.height=window.innerHeight;
+
+}
+
+resizeComet();
+
+
+window.addEventListener("resize",resizeComet);
+
+
+
+/* Mouse position */
+
+let mouseX=-100;
+
+let mouseY=-100;
+
+
+/* Smooth comet position */
+
+let cometX=-100;
+
+let cometY=-100;
+
+
+/* Comet state */
+
+let cometVisible=false;
+
+
+/* Comet trail */
+
+let cometTrail=[];
+
+const maxTrail=45;
+
+
+
+/* Mouse movement */
+
+document.addEventListener("mousemove",(e)=>{
+
+mouseX=e.clientX;
+
+mouseY=e.clientY;
+
+
+/* Find card */
+
+const card=document.querySelector(".card");
+
+if(card){
+
+const rect=card.getBoundingClientRect();
+
+
+/* Check if mouse is inside card */
+
+const insideCard=
+
+mouseX>=rect.left &&
+mouseX<=rect.right &&
+mouseY>=rect.top &&
+mouseY<=rect.bottom;
+
+
+/* Outside = show comet */
+/* Inside = hide comet */
+
+cometVisible=!insideCard;
+
+}
+
+});
+
+
+
+/* ==============================
+   DRAW COMET
+================================ */
+
+function drawComet(){
+
+/* Clear previous frame */
+
+cometCtx.clearRect(
+0,
+0,
+cometCanvas.width,
+cometCanvas.height
+);
+
+
+
+/* If mouse is outside card */
+
+if(cometVisible){
+
+
+/* Smoothly follow mouse */
+
+cometX +=
+(mouseX-cometX)*0.20;
+
+cometY +=
+(mouseY-cometY)*0.20;
+
+
+
+/* Add current position */
+
+cometTrail.push({
+
+x:cometX,
+
+y:cometY
+
+});
+
+
+
+/* Limit trail */
+
+if(cometTrail.length>maxTrail){
+
+cometTrail.shift();
+
+}
+
+
+
+/* ==============================
+   COMET TAIL
+================================ */
+
+for(let i=0;i<cometTrail.length;i++){
+
+const p=cometTrail[i];
+
+const progress=i/cometTrail.length;
+
+
+/* Tail gets smaller */
+
+const radius=
+progress*5.5;
+
+
+/* Tail gets brighter */
+
+const opacity=
+progress*0.55;
+
+
+cometCtx.beginPath();
+
+cometCtx.arc(
+p.x,
+p.y,
+radius,
+0,
+Math.PI*2
+);
+
+
+cometCtx.fillStyle=
+`rgba(255,215,0,${opacity})`;
+
+
+cometCtx.shadowBlur=18;
+
+cometCtx.shadowColor="gold";
+
+cometCtx.fill();
+
+}
+
+
+
+/* ==============================
+   COMET MAIN GLOW
+================================ */
+
+const glow=
+cometCtx.createRadialGradient(
+
+cometX,
+cometY,
+0,
+
+cometX,
+cometY,
+30
+
+);
+
+
+glow.addColorStop(
+0,
+"rgba(255,255,255,1)"
+);
+
+glow.addColorStop(
+0.12,
+"rgba(255,245,150,1)"
+);
+
+glow.addColorStop(
+0.35,
+"rgba(255,215,0,.9)"
+);
+
+glow.addColorStop(
+0.65,
+"rgba(255,180,0,.35)"
+);
+
+glow.addColorStop(
+1,
+"rgba(255,215,0,0)"
+);
+
+
+
+cometCtx.beginPath();
+
+cometCtx.arc(
+cometX,
+cometY,
+30,
+0,
+Math.PI*2
+);
+
+
+cometCtx.fillStyle=glow;
+
+cometCtx.shadowBlur=35;
+
+cometCtx.shadowColor="gold";
+
+cometCtx.fill();
+
+
+
+/* ==============================
+   BRIGHT COMET CORE
+================================ */
+
+cometCtx.beginPath();
+
+cometCtx.arc(
+cometX,
+cometY,
+4,
+0,
+Math.PI*2
+);
+
+cometCtx.fillStyle="#ffffff";
+
+cometCtx.shadowBlur=20;
+
+cometCtx.shadowColor="#ffffff";
+
+cometCtx.fill();
+
+}
+
+
+
+/* ==============================
+   HIDE COMET INSIDE CARD
+================================ */
+
+else{
+
+/* Clear tail */
+
+cometTrail.length=0;
+
+}
+
+
+
+/* Next frame */
+
+requestAnimationFrame(drawComet);
+
+}
+
+
+drawComet();
 
 </script>
 
