@@ -132,7 +132,7 @@ color:#ccc;
 }
 
 
-/* TAGS */
+/* GAME TAGS */
 
 .tags{
 margin-top:25px;
@@ -142,9 +142,33 @@ margin-top:25px;
 display:inline-block;
 margin:5px;
 padding:8px 15px;
+
 border:1px solid gold;
 border-radius:30px;
+
 background:rgba(255,215,0,.08);
+
+transition:all .25s ease;
+
+cursor:pointer;
+}
+
+
+/* GAME TAG HOVER */
+
+.tags span:hover{
+
+background:gold;
+color:#000;
+
+transform:
+translateY(-5px)
+scale(1.08);
+
+box-shadow:
+0 0 15px gold,
+0 0 30px rgba(255,215,0,.7);
+
 }
 
 
@@ -295,6 +319,8 @@ Become part of the HG Family today! 🚀🔥
 
 </div>
 
+
+<!-- GAME TAGS -->
 
 <div class="tags">
 
@@ -604,8 +630,6 @@ cometCanvas.height
 );
 
 
-/* COMET OUTSIDE CARD */
-
 if(cometVisible){
 
 
@@ -634,9 +658,7 @@ cometTrail.shift();
 
 
 
-/* ==============================
-   COMET TAIL
-================================ */
+/* COMET TAIL */
 
 for(let i=0;i<cometTrail.length;i++){
 
@@ -644,13 +666,7 @@ const p=cometTrail[i];
 
 const progress=i/cometTrail.length;
 
-
-/* Smaller tail */
-
 const radius=progress*3.5;
-
-
-/* Fainter tail */
 
 const opacity=progress*0.40;
 
@@ -678,9 +694,7 @@ cometCtx.fill();
 
 
 
-/* ==============================
-   VERY SMALL YELLOW POINT
-================================ */
+/* SMALL YELLOW POINT */
 
 const glow=
 cometCtx.createRadialGradient(
@@ -741,9 +755,7 @@ cometCtx.fill();
 
 
 
-/* ==============================
-   TINY WHITE CORE
-================================ */
+/* TINY WHITE CORE */
 
 cometCtx.beginPath();
 
@@ -766,9 +778,7 @@ cometCtx.fill();
 }
 
 
-/* ==============================
-   CLEAR COMET INSIDE CARD
-================================ */
+/* CLEAR COMET INSIDE CARD */
 
 else{
 
@@ -776,8 +786,6 @@ cometTrail.length=0;
 
 }
 
-
-/* Next frame */
 
 requestAnimationFrame(drawComet);
 
