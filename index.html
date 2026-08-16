@@ -3,11 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Hunter GamerZ</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
 <style>
+
 *{
 margin:0;
 padding:0;
@@ -19,7 +24,7 @@ font-family:Poppins,sans-serif;
 background:#000;
 color:#fff;
 overflow:auto;
-min-height: 100vh;
+min-height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
@@ -47,19 +52,24 @@ border-radius:25px;
 background:rgba(255,255,255,.05);
 backdrop-filter:blur(15px);
 border:1px solid rgba(255,215,0,.3);
+
 box-shadow:
 0 0 25px rgba(255,215,0,.3),
 0 0 60px rgba(255,215,0,.15);
+
 animation:glow 3s infinite alternate;
 }
 
 @keyframes glow{
+
 from{
 box-shadow:0 0 20px rgba(255,215,0,.25);
 }
+
 to{
 box-shadow:0 0 50px rgba(255,215,0,.5);
 }
+
 }
 
 .logo{
@@ -72,12 +82,15 @@ animation:float 3s ease-in-out infinite;
 }
 
 @keyframes float{
+
 0%,100%{
 transform:translateY(0);
 }
+
 50%{
 transform:translateY(-10px);
 }
+
 }
 
 h1{
@@ -136,17 +149,8 @@ color:#999;
 font-size:.9rem;
 }
 
-@media(max-width:768px){
 
-.logo{
-width:140px;
-}
-
-h1{
-font-size:2rem;
-}
-
-}
+/* SOCIAL BUTTONS */
 
 .socials{
 margin-top:30px;
@@ -165,6 +169,15 @@ color:gold;
 border:1px solid gold;
 background:rgba(255,215,0,.08);
 transition:.3s;
+
+display:flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+}
+
+.social-btn i{
+font-size:18px;
 }
 
 .social-btn:hover{
@@ -172,6 +185,21 @@ background:gold;
 color:#000;
 transform:translateY(-3px);
 box-shadow:0 0 20px gold;
+}
+
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.logo{
+width:140px;
+}
+
+h1{
+font-size:2rem;
+}
+
 }
 
 </style>
@@ -190,49 +218,85 @@ box-shadow:0 0 20px gold;
 <div class="typing" id="typing"></div>
 
 <div class="description">
+
 🎮 Hunter GamerZ is a welcoming gaming community for gamers and friends.
 Join voice chats, events, giveaways and enjoy amazing adventures together.
 Become part of the HG Family today! 🚀🔥
+
 </div>
 
+
 <div class="tags">
-<span>Euro Truck Simulator2</span>
+
+<span>Euro Truck Simulator 2</span>
 <span>Minecraft</span>
 <span>Grand Theft Auto V</span>
 <span>Valorant</span>
 <span>Free Fire</span>
 <span>PUBG</span>
+
 </div>
+
+
+<!-- SOCIAL BUTTONS -->
 
 <div class="socials">
 
-<a href="https://discord.gg/mRJdyqGbZY" target="_blank" class="social-btn">
-<i class="fa-brands fa-discord"></i> Discord
+<a href="https://discord.gg/mRJdyqGbZY"
+target="_blank"
+class="social-btn">
+
+<i class="fa-brands fa-discord"></i>
+Discord
+
 </a>
 
-<a href="https://www.youtube.com/channel/UCSrMuBlhGN1ChvRBWvm2xIg" target="_blank" class="social-btn">
-<i class="fa-brands fa-youtube"></i> YouTube
+
+<a href="https://www.youtube.com/channel/UCSrMuBlhGN1ChvRBWvm2xIg"
+target="_blank"
+class="social-btn">
+
+<i class="fa-brands fa-youtube"></i>
+YouTube
+
 </a>
 
-<a href="https://www.facebook.com/profile.php?id=61583118716397" target="_blank" class="social-btn">
-<i class="fa-brands fa-facebook"></i> Facebook
+
+<a href="https://www.facebook.com/profile.php?id=61583118716397"
+target="_blank"
+class="social-btn">
+
+<i class="fa-brands fa-facebook"></i>
+Facebook
+
 </a>
 
-<a href="https://instagram.com/" target="_blank" class="social-btn">
-<i class="fa-brands fa-instagram"></i> Instagram
+
+<a href="https://instagram.com/"
+target="_blank"
+class="social-btn">
+
+<i class="fa-brands fa-instagram"></i>
+Instagram
+
 </a>
 
 </div>
-
 
 
 <div class="footer">
+
 👑 Play Together • Grow Together • Hunt Together
+
 </div>
 
 </div>
+
 
 <script>
+
+/* TYPING EFFECT */
+
 const texts=[
 "Active Community 🎉",
 "Voice Hangouts 🎙",
@@ -253,19 +317,28 @@ count=0;
 }
 
 currentText=texts[count];
+
 letter=currentText.slice(0,++index);
 
 document.getElementById("typing").textContent=letter;
 
 if(letter.length===currentText.length){
+
 count++;
 index=0;
+
 setTimeout(type,1500);
+
 }else{
+
 setTimeout(type,80);
+
 }
 
 })();
+
+
+/* PARTICLES */
 
 const canvas=document.getElementById("particles");
 const ctx=canvas.getContext("2d");
@@ -276,17 +349,27 @@ canvas.height=window.innerHeight;
 let particles=[];
 
 for(let i=0;i<100;i++){
+
 particles.push({
+
 x:Math.random()*canvas.width,
 y:Math.random()*canvas.height,
 r:Math.random()*2+1,
 d:Math.random()*2
+
 });
+
 }
+
 
 function draw(){
 
-ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.clearRect(
+0,
+0,
+canvas.width,
+canvas.height
+);
 
 ctx.fillStyle="gold";
 
@@ -295,21 +378,46 @@ for(let i=0;i<particles.length;i++){
 let p=particles[i];
 
 ctx.beginPath();
-ctx.arc(p.x,p.y,p.r,0,Math.PI*2,true);
+
+ctx.arc(
+p.x,
+p.y,
+p.r,
+0,
+Math.PI*2,
+true
+);
+
 ctx.fill();
 
 p.y+=p.d;
 
 if(p.y>canvas.height){
+
 p.y=0;
+
 p.x=Math.random()*canvas.width;
+
 }
+
 }
 
 requestAnimationFrame(draw);
+
 }
 
 draw();
+
+
+/* RESPONSIVE CANVAS */
+
+window.addEventListener("resize",()=>{
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+});
+
 </script>
 
 </body>
