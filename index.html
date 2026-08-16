@@ -168,8 +168,9 @@ font-weight:600;
 color:gold;
 border:1px solid gold;
 background:rgba(255,215,0,.08);
-transition:.3s;
-
+transition:all .25s ease;
+cursor:pointer;
+  
 display:flex;
 align-items:center;
 justify-content:center;
@@ -183,8 +184,18 @@ font-size:18px;
 .social-btn:hover{
 background:gold;
 color:#000;
-transform:translateY(-3px);
-box-shadow:0 0 20px gold;
+transform:translateY(-6px) scale(1.05);
+box-shadow:
+0 0 15px gold,
+0 0 30px rgba(255,215,0,.7);
+}
+
+.social-btn:hover i{
+transform:scale(1.2) rotate(-5deg);
+}
+
+.social-btn:active{
+transform:translateY(-2px) scale(.98);
 }
 
 
