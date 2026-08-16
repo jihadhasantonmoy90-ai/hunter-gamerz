@@ -237,9 +237,7 @@ scale(.98);
 }
 
 
-/* ==============================
-   MOUSE COMET
-================================ */
+/* MOUSE COMET */
 
 #mouseComet{
 position:fixed;
@@ -276,7 +274,7 @@ font-size:2rem;
 
 <canvas id="particles"></canvas>
 
-<!-- MOUSE COMET CANVAS -->
+<!-- MOUSE COMET -->
 <canvas id="mouseComet"></canvas>
 
 
@@ -530,26 +528,22 @@ cometCanvas.height=window.innerHeight;
 
 resizeComet();
 
-
 window.addEventListener("resize",resizeComet);
-
 
 
 /* Mouse position */
 
 let mouseX=-100;
-
 let mouseY=-100;
 
 
 /* Smooth comet position */
 
 let cometX=-100;
-
 let cometY=-100;
 
 
-/* Comet state */
+/* Comet visibility */
 
 let cometVisible=false;
 
@@ -558,7 +552,7 @@ let cometVisible=false;
 
 let cometTrail=[];
 
-const maxTrail=45;
+const maxTrail=40;
 
 
 
@@ -567,11 +561,10 @@ const maxTrail=45;
 document.addEventListener("mousemove",(e)=>{
 
 mouseX=e.clientX;
-
 mouseY=e.clientY;
 
 
-/* Find card */
+/* Detect card */
 
 const card=document.querySelector(".card");
 
@@ -579,19 +572,15 @@ if(card){
 
 const rect=card.getBoundingClientRect();
 
-
-/* Check if mouse is inside card */
-
 const insideCard=
-
 mouseX>=rect.left &&
 mouseX<=rect.right &&
 mouseY>=rect.top &&
 mouseY<=rect.bottom;
 
 
-/* Outside = show comet */
-/* Inside = hide comet */
+/* Outside card = ON */
+/* Inside card = OFF */
 
 cometVisible=!insideCard;
 
@@ -607,8 +596,6 @@ cometVisible=!insideCard;
 
 function drawComet(){
 
-/* Clear previous frame */
-
 cometCtx.clearRect(
 0,
 0,
@@ -617,13 +604,12 @@ cometCanvas.height
 );
 
 
-
-/* If mouse is outside card */
+/* COMET OUTSIDE CARD */
 
 if(cometVisible){
 
 
-/* Smoothly follow mouse */
+/* Smooth mouse following */
 
 cometX +=
 (mouseX-cometX)*0.20;
@@ -632,20 +618,13 @@ cometY +=
 (mouseY-cometY)*0.20;
 
 
-
-/* Add current position */
+/* Add trail point */
 
 cometTrail.push({
-
 x:cometX,
-
 y:cometY
-
 });
 
-
-
-/* Limit trail */
 
 if(cometTrail.length>maxTrail){
 
@@ -666,16 +645,14 @@ const p=cometTrail[i];
 const progress=i/cometTrail.length;
 
 
-/* Tail gets smaller */
+/* Smaller tail */
 
-const radius=
-progress*5.5;
+const radius=progress*4;
 
 
-/* Tail gets brighter */
+/* Fainter tail */
 
-const opacity=
-progress*0.55;
+const opacity=progress*0.45;
 
 
 cometCtx.beginPath();
@@ -688,12 +665,10 @@ radius,
 Math.PI*2
 );
 
-
 cometCtx.fillStyle=
 `rgba(255,215,0,${opacity})`;
 
-
-cometCtx.shadowBlur=18;
+cometCtx.shadowBlur=12;
 
 cometCtx.shadowColor="gold";
 
@@ -704,7 +679,7 @@ cometCtx.fill();
 
 
 /* ==============================
-   COMET MAIN GLOW
+   SMALL MAIN COMET GLOW
 ================================ */
 
 const glow=
@@ -716,10 +691,9 @@ cometY,
 
 cometX,
 cometY,
-30
+16
 
 );
-
 
 glow.addColorStop(
 0,
@@ -727,18 +701,18 @@ glow.addColorStop(
 );
 
 glow.addColorStop(
-0.12,
+0.15,
 "rgba(255,245,150,1)"
 );
 
 glow.addColorStop(
-0.35,
-"rgba(255,215,0,.9)"
+0.40,
+"rgba(255,215,0,.85)"
 );
 
 glow.addColorStop(
-0.65,
-"rgba(255,180,0,.35)"
+0.70,
+"rgba(255,180,0,.25)"
 );
 
 glow.addColorStop(
@@ -747,21 +721,19 @@ glow.addColorStop(
 );
 
 
-
 cometCtx.beginPath();
 
 cometCtx.arc(
 cometX,
 cometY,
-30,
+15,
 0,
 Math.PI*2
 );
 
-
 cometCtx.fillStyle=glow;
 
-cometCtx.shadowBlur=35;
+cometCtx.shadowBlur=20;
 
 cometCtx.shadowColor="gold";
 
@@ -770,7 +742,7 @@ cometCtx.fill();
 
 
 /* ==============================
-   BRIGHT COMET CORE
+   SMALL WHITE CORE
 ================================ */
 
 cometCtx.beginPath();
@@ -778,35 +750,31 @@ cometCtx.beginPath();
 cometCtx.arc(
 cometX,
 cometY,
-4,
+2.5,
 0,
 Math.PI*2
 );
 
-cometCtx.fillStyle="#ffffff";
+cometCtx.fillStyle="#fff";
 
-cometCtx.shadowBlur=20;
+cometCtx.shadowBlur=12;
 
-cometCtx.shadowColor="#ffffff";
+cometCtx.shadowColor="#fff";
 
 cometCtx.fill();
 
 }
 
 
-
 /* ==============================
-   HIDE COMET INSIDE CARD
+   CLEAR COMET INSIDE CARD
 ================================ */
 
 else{
 
-/* Clear tail */
-
 cometTrail.length=0;
 
 }
-
 
 
 /* Next frame */
