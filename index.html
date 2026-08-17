@@ -427,33 +427,56 @@ margin-top:25px;
 
 display:flex;
 
-justify-content:center;
+flex-direction:column;
 
 align-items:center;
 
+justify-content:center;
+
 gap:12px;
-
-flex-wrap:wrap;
-
 }
 
 
 .stat{
 
-padding:10px 18px;
+display:flex;
 
-border-radius:50px;
+align-items:center;
 
-border:1px solid rgba(255,215,0,.7);
+justify-content:center;
 
-background:rgba(255,215,0,.06);
+min-width:145px;
 
-color:#ffd700;
+padding:9px 17px;
+
+border-radius:30px;
+
+border:1px solid rgba(255,215,0,.55);
+
+background:
+linear-gradient(
+135deg,
+rgba(255,215,0,.12),
+rgba(255,255,255,.04),
+rgba(255,170,0,.10)
+);
+
+color:#ffe98a;
 
 font-weight:600;
 
-transition:.25s;
+letter-spacing:.3px;
 
+box-shadow:
+inset 0 0 12px rgba(255,215,0,.04),
+0 0 8px rgba(255,215,0,.08);
+
+transition:
+transform .25s ease,
+background .25s ease,
+box-shadow .25s ease,
+color .25s ease,
+border-color .25s ease;
 }
 
 
@@ -488,21 +511,31 @@ inset 0 0 8px rgba(255,255,255,.35);
 
 .like-btn{
 
-border:1px solid gold;
+min-width:145px;
 
-background:rgba(255,215,0,.08);
+padding:9px 17px;
 
-color:gold;
+border-radius:30px;
 
-padding:12px 22px;
+border:1px solid rgba(255,215,0,.55);
 
-border-radius:50px;
+background:
+linear-gradient(
+135deg,
+rgba(255,215,0,.12),
+rgba(255,255,255,.04),
+rgba(255,170,0,.10)
+);
+
+color:#ffe98a;
 
 font-family:Poppins,sans-serif;
 
 font-size:15px;
 
 font-weight:600;
+
+letter-spacing:.3px;
 
 cursor:pointer;
 
@@ -514,10 +547,16 @@ justify-content:center;
 
 gap:8px;
 
+box-shadow:
+inset 0 0 12px rgba(255,215,0,.04),
+0 0 8px rgba(255,215,0,.08);
+
 transition:
-
-all .25s ease;
-
+transform .25s ease,
+background .25s ease,
+box-shadow .25s ease,
+color .25s ease,
+border-color .25s ease;
 }
 
 
@@ -984,7 +1023,6 @@ Instagram
 
 <div class="stats">
 
-
 <div
 class="stat"
 id="viewCount">
@@ -1014,29 +1052,6 @@ Like
 </span>
 
 </button>
-
-
-</div>
-
-
-<!-- =========================
-     QR IMAGE
-========================= -->
-
-<div class="qr-section">
-
-<img
-src="qr.png"
-class="qr-image"
-id="qrImage"
-alt="Hunter GamerZ QR Code"
->
-
-<div class="qr-text">
-
-📱 Click the QR code to enlarge
-
-</div>
 
 </div>
 
