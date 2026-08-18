@@ -329,23 +329,23 @@ flex-wrap:wrap;
 
 .social-btn{
 
-padding:12px 20px;
+padding:9px 17px;
 
-border-radius:50px;
+border-radius:30px;
 
 text-decoration:none;
 
 font-weight:600;
 
-color:gold;
+letter-spacing:.3px;
 
-border:1px solid gold;
+color:#ffe98a;
 
-background:rgba(255,215,0,.08);
+border:1px solid rgba(255,215,0,.55);
 
-transition:
+background:linear-gradient(135deg,rgba(255,215,0,.12),rgba(255,255,255,.04),rgba(255,170,0,.10));
 
-all .25s ease;
+text-shadow:0 0 8px rgba(255,215,0,.25);
 
 cursor:pointer;
 
@@ -357,8 +357,11 @@ justify-content:center;
 
 gap:8px;
 
-}
+transition:transform .3s ease,background .3s ease,box-shadow .3s ease,color .3s ease,border-color .3s ease;
 
+box-shadow:inset 0 0 12px rgba(255,215,0,.04),0 0 8px rgba(255,215,0,.08);
+
+}
 
 .social-btn i{
 
@@ -422,116 +425,69 @@ scale(.98);
 ========================= */
 
 .stats{
-
-margin-top:25px;
-
+margin-top:22px;
+width:100%;
 display:flex;
-
-justify-content:center;
-
+justify-content:space-between;
 align-items:center;
-
-gap:12px;
-
-flex-wrap:wrap;
-
+gap:15px;
 }
 
-
+/* VIEWS = PLAIN TEXT, NO BOX */
 .stat{
-
-padding:10px 18px;
-
-border-radius:50px;
-
-border:1px solid rgba(255,215,0,.7);
-
-background:rgba(255,215,0,.06);
-
+padding:0;
+border:none;
+background:transparent;
 color:#ffd700;
-
 font-weight:600;
-
-transition:.25s;
-
+font-size:15px;
+cursor:default;
+transition:transform .25s ease,color .25s ease,text-shadow .25s ease;
 }
-
 
 .stat:hover{
-
-background:
-linear-gradient(
-135deg,
-#ffd84d,
-#ffe98a,
-#ffc400
-);
-
-color:#1a1200;
-
-border-color:#ffd700;
-
-transform:
-translateY(-5px)
-scale(1.06);
-
-box-shadow:
-0 0 10px rgba(255,215,0,.45),
-0 0 22px rgba(255,215,0,.20),
-inset 0 0 8px rgba(255,255,255,.35);
+background:transparent;
+color:#fff;
+border:none;
+transform:translateY(-3px) scale(1.05);
+box-shadow:none;
+text-shadow:
+0 0 8px rgba(255,215,0,.8),
+0 0 18px rgba(255,215,0,.35);
 }
 
 
 /* =========================
-   LIKE BUTTON
+   LIKE BUTTON — GAME/SOCIAL STYLE
 ========================= */
 
 .like-btn{
-
-border:1px solid gold;
-
-background:rgba(255,215,0,.08);
-
-color:gold;
-
-padding:12px 22px;
-
-border-radius:50px;
-
-font-family:Poppins,sans-serif;
-
-font-size:15px;
-
-font-weight:600;
-
-cursor:pointer;
-
-display:flex;
-
+display:inline-flex;
 align-items:center;
-
 justify-content:center;
-
 gap:8px;
-
-transition:
-
-all .25s ease;
-
+margin:0;
+padding:9px 17px;
+border:1px solid rgba(255,215,0,.55);
+border-radius:30px;
+background:linear-gradient(135deg,rgba(255,215,0,.12),rgba(255,255,255,.04),rgba(255,170,0,.10));
+color:#ffe98a;
+font-family:Poppins,sans-serif;
+font-size:15px;
+font-weight:600;
+letter-spacing:.3px;
+text-shadow:0 0 8px rgba(255,215,0,.25);
+cursor:pointer;
+transition:transform .3s ease,background .3s ease,box-shadow .3s ease,color .3s ease,border-color .3s ease;
+box-shadow:inset 0 0 12px rgba(255,215,0,.04),0 0 8px rgba(255,215,0,.08);
 }
-
 
 .like-btn i{
-
-font-size:18px;
-
-transition:.25s;
-
+font-size:17px;
+transition:transform .25s ease;
 }
 
-
 .like-btn:hover{
-
 background:
 linear-gradient(
 135deg,
@@ -539,39 +495,34 @@ linear-gradient(
 #ffe98a,
 #ffc400
 );
-
 color:#1a1200;
-
 border-color:#ffd700;
-
-transform:
-translateY(-5px)
-scale(1.06);
-
+transform:translateY(-5px) scale(1.06);
+text-shadow:none;
 box-shadow:
 0 0 10px rgba(255,215,0,.45),
 0 0 22px rgba(255,215,0,.20),
 inset 0 0 8px rgba(255,255,255,.35);
 }
 
-
-.like-btn.liked{
-
-background:rgba(255,215,0,.18);
-
-color:#ffe98a;
-
-border-color:rgba(255,215,0,.7);
-
-box-shadow:
-inset 0 0 10px rgba(255,215,0,.08);
+.like-btn:hover i{
+transform:scale(1.15);
+color:#1a1200;
 }
 
+.like-btn:active{
+transform:translateY(-2px) scale(.98);
+}
+
+.like-btn.liked{
+background:linear-gradient(135deg,rgba(255,215,0,.18),rgba(255,255,255,.05),rgba(255,170,0,.14));
+color:#ffe98a;
+border-color:rgba(255,215,0,.7);
+box-shadow:inset 0 0 10px rgba(255,215,0,.08),0 0 8px rgba(255,215,0,.12);
+}
 
 .like-btn.liked i{
-
 transform:scale(1.15);
-
 }
 
 
@@ -840,9 +791,16 @@ padding:9px 12px;
 }
 
 .stats{
+width:100%;
+}
 
-gap:8px;
+.stat{
+font-size:.85rem;
+}
 
+.like-btn{
+padding:9px 14px;
+font-size:.85rem;
 }
 
 }
@@ -981,47 +939,6 @@ Instagram
 
 
 <!-- =========================
-     VIEW + LIKE COUNTER
-========================= -->
-
-<div class="stats">
-
-
-<div
-class="stat"
-id="viewCount">
-
-👁 Views: 0
-
-</div>
-
-
-<button
-class="like-btn"
-id="likeButton"
-type="button">
-
-<i class="fa-regular fa-heart"></i>
-
-<span id="likeText">
-
-Like
-
-</span>
-
-<span id="likeCount">
-
-0
-
-</span>
-
-</button>
-
-
-</div>
-
-
-<!-- =========================
      QR IMAGE
 ========================= -->
 
@@ -1039,6 +956,28 @@ alt="Hunter GamerZ QR Code"
 📲 Click the QR Code to Enlarge & Scan to Join Our Discord.
 
 </div>
+
+</div>
+
+
+<!-- =========================
+     VIEW + LIKE COUNTER
+========================= -->
+
+<div class="stats">
+
+<div class="stat" id="viewCount">
+👁 Views: 0
+</div>
+
+<button
+class="like-btn"
+id="likeButton"
+type="button">
+<i class="fa-regular fa-heart"></i>
+<span id="likeText">Like</span>
+<span id="likeCount">0</span>
+</button>
 
 </div>
 
