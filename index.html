@@ -1378,18 +1378,15 @@ document.getElementById(
 
 currentStats.likes;
 
+/*
+   প্রতিটি নতুন page load/refresh-এ নতুন করে Like করার সুযোগ।
+   তাই refresh করলে আগের like count কমবে না, কিন্তু আবার +1 করা যাবে।
+*/
+sessionStorage.removeItem("hunter_gamerz_liked");
+
 
 /* CHECK LIKE */
-
-if(
-sessionStorage.getItem(
-"hunter_gamerz_liked"
-)==="yes"
-){
-
-setLiked();
-
-}
+/* Refresh-এর পর button আবার Like অবস্থায় থাকবে। */
 
 }
 
