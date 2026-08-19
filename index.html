@@ -1332,25 +1332,13 @@ currentStats=data;
 
 /* VIEW COUNT */
 
-const alreadyViewed =
-localStorage.getItem(
-"hunter_gamerz_viewed"
-);
-
-
 /*
-   একজন browser প্রথমবার website
-   visit করলে view বাড়বে।
+   প্রতিবার page refresh / reload / নতুন visit হলে
+   view ১ করে বাড়বে।
 */
+const newViews = data.views + 1;
 
-if(!alreadyViewed){
-
-const newViews =
-data.views + 1;
-
-
-const {error:updateError}=
-
+const {error:updateError} =
 await supabaseClient
 
 .from("website_stats")
@@ -1363,18 +1351,10 @@ views:newViews
 
 .eq("id",1);
 
-
 if(!updateError){
-
-localStorage.setItem(
-"hunter_gamerz_viewed",
-"yes"
-);
 
 currentStats.views =
 newViews;
-
-}
 
 }
 
@@ -1402,7 +1382,7 @@ currentStats.likes;
 /* CHECK LIKE */
 
 if(
-localStorage.getItem(
+sessionStorage.getItem(
 "hunter_gamerz_liked"
 )==="yes"
 ){
@@ -1476,68 +1456,19 @@ return;
 
 
 const alreadyLiked =
-localStorage.getItem(
+sessionStorage.getItem(
 "hunter_gamerz_liked"
 );
 
 
-/* UNLIKE */
-
+/*
+   Like একবার দিলে সেটা আর unlike হবে না।
+   Refresh করলে localStorage reset করে নতুন করে like দেওয়া যাবে,
+   কিন্তু আগের like count কমবে না।
+*/
 if(alreadyLiked==="yes"){
-
-const newLikes =
-Math.max(
-0,
-currentStats.likes-1
-);
-
-
-const {error}=
-
-await supabaseClient
-
-.from("website_stats")
-
-.update({
-
-likes:newLikes
-
-})
-
-.eq("id",1);
-
-
-if(error){
-
-console.error(error);
-
 return;
-
 }
-
-
-currentStats.likes =
-newLikes;
-
-
-localStorage.removeItem(
-"hunter_gamerz_liked"
-);
-
-
-setUnliked();
-
-
-document.getElementById(
-"likeCount"
-).textContent =
-newLikes;
-
-
-return;
-
-}
-
 
 /* LIKE */
 
@@ -1573,11 +1504,14 @@ currentStats.likes =
 newLikes;
 
 
-localStorage.setItem(
+/*
+   এই page session-এ button-টা Liked থাকবে।
+   Refresh হলে browser নতুন like দিতে পারবে।
+*/
+sessionStorage.setItem(
 "hunter_gamerz_liked",
 "yes"
 );
-
 
 setLiked();
 
