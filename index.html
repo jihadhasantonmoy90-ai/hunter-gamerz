@@ -805,6 +805,217 @@ font-size:.85rem;
 
 }
 
+
+/* =========================
+   EXTRA RESPONSIVE FIXES
+   ========================= */
+
+html{
+  width:100%;
+  min-height:100%;
+  overflow-x:hidden;
+}
+
+body{
+  width:100%;
+  min-height:100vh;
+  padding:24px 12px;
+  overflow-x:hidden;
+  overflow-y:auto;
+}
+
+.card{
+  width:min(700px, 100%);
+  max-width:100%;
+  margin:auto;
+}
+
+img{
+  max-width:100%;
+  height:auto;
+}
+
+@media (max-width:768px){
+  body{
+    padding:20px 10px;
+    align-items:flex-start;
+  }
+
+  .card{
+    width:100%;
+    padding:24px 16px;
+    border-radius:20px;
+  }
+
+  .logo{
+    width:140px;
+    max-width:42vw;
+  }
+
+  h1{
+    font-size:clamp(1.8rem, 8vw, 2.5rem);
+    line-height:1.15;
+    overflow-wrap:anywhere;
+  }
+
+  .typing{
+    font-size:clamp(.9rem, 3.5vw, 1.05rem);
+    min-height:30px;
+    height:auto;
+  }
+
+  .description{
+    font-size:.92rem;
+    line-height:1.7;
+  }
+
+  .tags,
+  .socials{
+    gap:8px;
+  }
+
+  .tags span,
+  .social-btn{
+    font-size:.84rem;
+    padding:8px 12px;
+  }
+
+  .stats{
+    gap:10px;
+    align-items:center;
+  }
+
+  .stat,
+  .like-btn{
+    font-size:.84rem;
+  }
+
+  .qr-image{
+    width:150px;
+    max-width:55vw;
+  }
+}
+
+@media (max-width:480px){
+  body{
+    padding:12px 7px;
+  }
+
+  .card{
+    padding:20px 12px;
+    border-radius:18px;
+  }
+
+  .logo{
+    width:120px;
+    max-width:38vw;
+    border-width:3px;
+    margin-bottom:14px;
+  }
+
+  h1{
+    font-size:clamp(1.5rem, 9vw, 2rem);
+  }
+
+  .description{
+    margin-top:14px;
+    font-size:.84rem;
+    line-height:1.65;
+  }
+
+  .tags,
+  .socials{
+    gap:7px;
+  }
+
+  .tags span,
+  .social-btn{
+    font-size:.76rem;
+    padding:7px 9px;
+  }
+
+  .social-btn{
+    gap:5px;
+  }
+
+  .social-btn i{
+    font-size:15px;
+  }
+
+  .stats{
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:12px;
+  }
+
+  .stat,
+  .like-btn{
+    font-size:.78rem;
+  }
+
+  .like-btn{
+    padding:8px 12px;
+  }
+
+  .qr-image{
+    width:130px;
+  }
+
+  .qr-text{
+    font-size:.75rem;
+    line-height:1.5;
+  }
+
+  .footer{
+    font-size:.76rem;
+    line-height:1.5;
+  }
+
+  .qr-close{
+    top:14px;
+    right:18px;
+    font-size:30px;
+  }
+
+  .qr-modal{
+    padding:12px;
+  }
+
+  .qr-modal img{
+    max-width:94vw;
+    max-height:82vh;
+  }
+}
+
+@media (max-width:350px){
+  .card{
+    padding:18px 9px;
+  }
+
+  .tags span,
+  .social-btn{
+    font-size:.7rem;
+    padding:6px 8px;
+  }
+
+  .description{
+    font-size:.78rem;
+  }
+
+  .stat,
+  .like-btn{
+    font-size:.72rem;
+  }
+}
+
+@media (hover:none), (pointer:coarse){
+  .tags span:hover,
+  .social-btn:hover,
+  .like-btn:hover{
+    transform:none;
+  }
+}
+
 </style>
 
 </head>
